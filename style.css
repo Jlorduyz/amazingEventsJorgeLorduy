@@ -16,3 +16,10 @@ header,
 footer {
   min-height: 6vh;
 }
+th,
+td {
+  height: 40px;
+}
+.img2 {
+  width: 650px;
+}
