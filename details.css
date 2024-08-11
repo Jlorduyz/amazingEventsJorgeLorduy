@@ -1,0 +1,10 @@
+.navbar-brand img {
+  height: 3rem;
+}
+footer img {
+  width: 50px;
+}
+header,
+footer {
+  min-height: 6vh;
+}

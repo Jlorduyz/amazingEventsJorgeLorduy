@@ -201,3 +201,49 @@ let identificador = urlObjeto.get("id");
 let eventoRender = data.events.find((i) => i._id == identificador);
 
 console.log(eventoRender);
+
+let contenedor = document.getElementById("containerr");
+
+function tarjetDetails(a, b) {
+  let tarjeta = document.createElement("div");
+
+  tarjeta.classList.add("card", "mb-3", "col-8", "bg-dark", "bg-gradient");
+
+  tarjeta.innerHTML = `<div class="row g-0 h-100">
+      <div class="col-md-4">
+        <img
+          src="${a.image}"
+          class="object-fit-cover img-fluid rounded-start h-100"
+          alt="..."
+        />
+      </div>
+      <div class="col-md-8">
+        <div
+          class="card-body d-flex flex-column justify-content-around h-100"
+        >
+          <h3 class="card-title fs-1 text-light">${a.name}</h3>
+          <ul class="list-group gap-3 ">
+            <li class="list-group-item bg-secondary bg-gradient text-light">
+              Description: <span class="fw-bold fs-6">${a.description}</span>
+            </li>
+            <li class="list-group-item bg-secondary bg-gradient text-light">
+              Category: <span class="fw-bold fs-6">${a.category}</span>
+            </li>
+            <li class="list-group-item bg-secondary bg-gradient text-light">
+              Place: <span class="fw-bold fs-6">${a.place}</span>
+            </li>
+            <li class="list-group-item bg-secondary bg-gradient text-light">
+              Date: <span class="fw-bold fs-6">${a.date}</span>
+            </li>
+          </ul>
+          <p class="align-self-center text-light">
+            Price: $<span class="fw-bold fs-5">${a.price}</span>
+          </p>
+        </div>
+      </div>
+    </div>`;
+
+  b.appendChild(tarjeta);
+}
+
+tarjetDetails(eventoRender, contenedor);
