@@ -163,61 +163,37 @@
         <div class="d-flex justify-content-center">
           <div class="col-10 mt-4">
             <table class="table table-bordered border-danger">
-              <tr>
-                <th class="text-center bg-danger bg-gradient" colspan="3">
-                  Events Statistics
-                </th>
-              </tr>
-              <tr>
-                <td>Events with highest % of assistance</td>
-                <td>Events with lowest % of assistance</td>
-                <td>Events with larger capacity</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th class="text-center bg-danger bg-gradient" colspan="3">
-                  Upcoming events statistics by category
-                </th>
-              </tr>
-              <tr>
-                <td>Categories</td>
-                <td>Revenues</td>
-                <td>Percentage of assistance</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th class="text-center bg-danger bg-gradient" colspan="3">
-                  Past events statistics by category
-                </th>
-              </tr>
-              <tr>
-                <td>Categories</td>
-                <td>Revenues</td>
-                <td>Percentage of assistance</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+              <tbody id="tablaStats">
+                <tr>
+                  <th class="text-center bg-danger bg-gradient" colspan="3">
+                    Events Statistics
+                  </th>
+                </tr>
+                <tr>
+                  <td class="text-bg-dark">
+                    Events with highest % of assistance
+                  </td>
+                  <td class="text-bg-dark">
+                    Events with lowest % of assistance
+                  </td>
+                  <td class="text-bg-dark">Events with larger capacity</td>
+                </tr>
+                <tr>
+                  <td id="eh"></td>
+                  <td id="el"></td>
+                  <td id="ec"></td>
+                </tr>
+                <tr>
+                  <th class="text-center bg-danger bg-gradient" colspan="3">
+                    Upcoming events statistics by category
+                  </th>
+                </tr>
+                <tr>
+                  <td class="text-bg-dark">Categories</td>
+                  <td class="text-bg-dark">Revenues</td>
+                  <td class="text-bg-dark">Percentage of assistance</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

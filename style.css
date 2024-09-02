@@ -19,6 +19,7 @@ footer {
 th,
 td {
   height: 40px;
+  text-align: center;
 }
 .img2 {
   width: 650px;

@@ -161,3 +161,135 @@ export function searchEvents(eventosFiltrados) {
     ).innerHTML = `<p class="fs-3">Ningun evento coincide con su busqueda.</p>`;
   }
 }
+export function tablaStats(a) {
+  let contenedor = document.getElementById("tablaStats");
+  function mayorAsistencia() {
+    let evento = { assistance: 0, capacity: 0 };
+    let porcentajeResultado = 0;
+    for (let i = 0; i < a.length; i++) {
+      let porcentajeAsistencia = (a[i].assistance / a[i].capacity) * 100;
+      if (porcentajeAsistencia > porcentajeResultado) {
+        evento = a[i];
+        porcentajeResultado = porcentajeAsistencia.toFixed(2);
+      }
+      document.getElementById(
+        "eh"
+      ).innerHTML = `${evento.name} (${porcentajeResultado}%)`;
+    }
+  }
+  function menorAsistencia() {
+    let evento = { assistance: 0, capacity: 0 };
+    let porcentajeResultado = 100;
+    for (let i = 0; i < a.length; i++) {
+      let porcentajeAsistencia = (a[i].assistance / a[i].capacity) * 100;
+      if (porcentajeAsistencia < porcentajeResultado) {
+        evento = a[i];
+        porcentajeResultado = porcentajeAsistencia.toFixed(2);
+      }
+      document.getElementById(
+        "el"
+      ).innerHTML = `${evento.name} (${porcentajeResultado}%)`;
+    }
+  }
+  function mayorCapacidad() {
+    let evento = { capacity: 0 };
+    let capacidad = 0;
+    for (let i = 0; i < a.length; i++) {
+      if (a[i].capacity > evento.capacity) {
+        evento = a[i];
+        capacidad = a[i].capacity;
+      }
+    }
+    document.getElementById("ec").innerHTML = `${evento.name} (${capacidad})`;
+  }
+  function upcoming() {
+    let eventos = a.filter((res) => res.date.slice(0, 4) >= 2023);
+
+    let categoriasU = eventos.reduce((acc, evento) => {
+      if (!acc.includes(evento.category)) {
+        acc.push(evento.category);
+      }
+      return acc;
+    }, []);
+
+    let gananciasU = categoriasU.map((categoria) => {
+      let porCategory = eventos.filter((res) => res.category == categoria);
+      let gananciasFinal = porCategory.reduce((acumulador, evento) => {
+        return acumulador + evento.estimate * evento.price;
+      }, 0);
+      return gananciasFinal;
+    });
+
+    let asistenciasU = categoriasU.map((categoria) => {
+      let porCategory = eventos.filter((res) => res.category == categoria);
+      let estimados = porCategory.reduce((acumulador, evento) => {
+        return acumulador + +evento.estimate;
+      }, 0);
+      let capacidades = porCategory.reduce((acumulador, evento) => {
+        return acumulador + +evento.capacity;
+      }, 0);
+      let porcentajeFinal = (estimados / capacidades) * 100;
+      return porcentajeFinal.toFixed(2);
+    });
+
+    categoriasU.forEach((categoria, index) => {
+      let fila = document.createElement("tr");
+      fila.innerHTML = `<td>${categoria}</td>
+                        <td>$${gananciasU[index]}</td>
+                        <td>${asistenciasU[index]}%</td>`;
+      contenedor.appendChild(fila);
+    });
+  }
+
+  function past() {
+    let eventos = a.filter((res) => res.date.slice(0, 4) < 2023);
+
+    let categoriasU = eventos.reduce((acc, evento) => {
+      if (!acc.includes(evento.category)) {
+        acc.push(evento.category);
+      }
+      return acc;
+    }, []);
+
+    let gananciasU = categoriasU.map((categoria) => {
+      let porCategory = eventos.filter((res) => res.category == categoria);
+      let gananciasFinal = porCategory.reduce((acumulador, evento) => {
+        return acumulador + evento.assistance * evento.price;
+      }, 0);
+      return gananciasFinal;
+    });
+
+    let asistenciasU = categoriasU.map((categoria) => {
+      let porCategory = eventos.filter((res) => res.category == categoria);
+      let estimados = porCategory.reduce((acumulador, evento) => {
+        return acumulador + +evento.assistance;
+      }, 0);
+      let capacidades = porCategory.reduce((acumulador, evento) => {
+        return acumulador + +evento.capacity;
+      }, 0);
+      let porcentajeFinal = (estimados / capacidades) * 100;
+      return porcentajeFinal.toFixed(2);
+    });
+
+    let pasttitles = document.createElement("tr");
+    pasttitles.innerHTML = `<th class="text-center bg-danger bg-gradient" colspan="3">Past events statistics by category</th></tr>`;
+    contenedor.appendChild(pasttitles);
+
+    let pasttitlesb = document.createElement("tr");
+    pasttitlesb.innerHTML = `<td class="text-bg-dark">Categories</td><td class="text-bg-dark">Revenues</td><td class="text-bg-dark">Percentage of assistance</td>`;
+    contenedor.appendChild(pasttitlesb);
+
+    categoriasU.forEach((categoria, index) => {
+      let fila = document.createElement("tr");
+      fila.innerHTML = `<td>${categoria}</td>
+                        <td>$${gananciasU[index]}</td>
+                        <td>${asistenciasU[index]}%</td>`;
+      contenedor.appendChild(fila);
+    });
+  }
+  mayorAsistencia();
+  menorAsistencia();
+  mayorCapacidad();
+  upcoming();
+  past();
+}
